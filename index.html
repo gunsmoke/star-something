@@ -1,0 +1,67 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Star Something!</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/libs/modernizr-2.5.3.min.js"></script>
+    <script src="js/libs/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="box2dweb/physics.js"></script>
+
+    <script type="text/javascript">
+        var b2Vec2              = Box2D.Common.Math.b2Vec2;
+        var b2BodyDef           = Box2D.Dynamics.b2BodyDef;
+        var b2Body              = Box2D.Dynamics.b2Body;
+        var b2BoxDef            = Box2D.Dynamics.b2BoxDef;
+        var b2FixtureDef        = Box2D.Dynamics.b2FixtureDef;
+        var b2Fixture           = Box2D.Dynamics.b2Fixture;
+        var b2MouseJointDef     = Box2D.Dynamics.Joints.b2MouseJointDef;
+        var b2World             = Box2D.Dynamics.b2World;
+        var b2MassData          = Box2D.Collision.Shapes.b2MassData;
+        var b2PolygonShape      = Box2D.Collision.Shapes.b2PolygonShape;
+        var b2CircleShape       = Box2D.Collision.Shapes.b2CircleShape;
+        var b2DebugDraw         = Box2D.Dynamics.b2DebugDraw;
+
+        var isMouseDown = false;
+        var scene = {scale:30,canvasWidth:0,canvasHeight:0};
+
+    	function sizeCanvas(){
+    		var width = $(window).width();
+    		var height = $(window).height();
+            scene.canvasWidth=width;
+            scene.canvasHeight=height;
+            $('canvas').width(width).height(height).attr("width",width).attr("height",height);
+    	}
+    	$(document).ready(function(){
+    		sizeCanvas();
+            window.addEventListener('keydown',handleKeyDown,true);
+            window.addEventListener('keyup',handleKeyUp,true);
+            window.addEventListener('mousemove',handelMouse,true);
+            window.addEventListener("mousedown", function(e){isMouseDown = true;}, true);
+            window.addEventListener("mouseup", function() {isMouseDown = false;}, true);
+    	});
+
+        $(window).load(function() {
+            setupWorld();
+            window.setInterval(update, 1000 / 60);
+        });
+
+	</script>
+    <script src='js/base.js'></script>
+    <script src='js/space.js'></script>
+
+	<link href="css/test.css" rel="stylesheet" type="text/css" />
+
+  </head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+</html>
